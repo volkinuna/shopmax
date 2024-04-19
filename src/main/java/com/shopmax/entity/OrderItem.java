@@ -10,7 +10,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class OrderItem {
+public class OrderItem extends BaseEntity {
 
     @Id
     @Column(name = "order_item_id")
@@ -21,11 +21,11 @@ public class OrderItem {
 
     private int count; //주문수량
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY) //LAZY : 지연 로딩, 기본은 즉시 로딩
     @JoinColumn(name = "item_id")
     private Item item; //OrderItem이 Item을 참조한다.
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order; //OrderItem이 Order를 참조한다.
 }

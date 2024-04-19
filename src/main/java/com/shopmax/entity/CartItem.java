@@ -10,7 +10,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class CartItem {
+public class CartItem extends BaseEntity {
 
     @Id
     @Column(name = "cart_item_id")
@@ -19,11 +19,11 @@ public class CartItem {
 
     private int count; //장바구니에 담긴 상품 수량
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY) //LAZY : 지연 로딩, 기본은 즉시 로딩
     @JoinColumn(name = "cart_id") //FK키
     private Cart cart; //CartItem은 Cart를 참조한다.
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id") //FK키
     private Item item; //CartItem은 Item을 참조한다.
 }

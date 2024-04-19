@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout1}">
+
+<th:block layout:fragment="css">
+    <style>
+        .error {
+           color: #bd2130;
+        }
+    </style>
+</th:block>
+
+<div layout:fragment="content">
+    <div class="bg-light py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 mb-0">
+                    <a href="/">Home</a> <span class="mx-2 mb-0">/</span>
+                    <strong class="text-black">로그인</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="h3 mb-3 text-black">로그인</h2>
+                    <div class="p-3 p-lg-5 border">
+                        <form role="form">
+                            <div class="form-group row">
+                                <div class="col-md-12"><label class="text-black">이메일</label> <input type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력해주세요" /></div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label class="text-black">비밀번호</label> <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호를 입력해주세요" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <p class="error"></p>
+                                <label><input type="checkbox" name="id_save" id="id_save" />이메일 기억</label>
+                                <div>
+                                    <button type="submit" class="btn btn-primary mb-3" id="loginbtn">로그인</button>
+                                    &nbsp;
+                                    <button type="button" class="btn btn-primary mb-3" onclick="location.href='/members/new'">회원가입</button>
+                                </div>
+                            </div>
+                            <input type="hidden" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block layout:fragment="script">
+    <script th:inline="javascript"></script>
+</th:block>
+
+</html>

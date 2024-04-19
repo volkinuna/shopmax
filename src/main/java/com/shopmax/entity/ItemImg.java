@@ -10,7 +10,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class ItemImg {
+public class ItemImg extends BaseEntity {
 
     @Id
     @Column(name = "item_img_id")
@@ -25,7 +25,7 @@ public class ItemImg {
 
     private String repImgYn; // 대표 이미지 여부(Y : 썸네일 이미지, N : 일반 이미지)
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY) //LAZY : 지연 로딩, 기본은 즉시 로딩
     @JoinColumn(name = "item_id")
     private Item item; //ItemImg가 Item을 참조한다.
 }
