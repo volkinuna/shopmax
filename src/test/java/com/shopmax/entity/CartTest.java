@@ -11,10 +11,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
-//@Transactional //트랜잭션 처리 : 중간에 에러 발생시 rollback을 시켜준다.
+@Transactional //트랜잭션 처리 : 중간에 에러 발생시 rollback을 시켜준다.
+@Rollback(false)
 @TestPropertySource(locations="classpath:application-test.properties")
 public class CartTest {
 
@@ -27,6 +31,9 @@ public class CartTest {
     @PersistenceContext
     EntityManager em;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     public Member createMember() {
         //사용자가 입력한 회원가입정보
         MemberFormDto memberFormDto = new MemberFormDto();
@@ -36,7 +43,7 @@ public class CartTest {
         memberFormDto.setPassword("1234");
 
         //DTO -> Entity 객체로 변환(JPA는 엔티티 객체로 CRUD를 진행)
-        Member member = Member.createMember(memberFormDto);
+        Member member = Member.createMember(memberFormDto, passwordEncoder);
         
         return member;
     }
