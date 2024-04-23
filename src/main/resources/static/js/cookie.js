@@ -1,5 +1,5 @@
 //쿠키값 Set
-function setCookie(cookieName, value, exdays){
+function setCookie(cookieName, value, exdays){ //exdays -> 얼마동안 쿠키를 저장할건지
     var exdate = new Date();
     exdate.setDate(exdate.getDate() + exdays);
     var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + 
@@ -22,10 +22,10 @@ function getCookie(cookie_name) {
     for (var i = 0; i < val.length; i++) {
         x = val[i].substr(0, val[i].indexOf('='));
         y = val[i].substr(val[i].indexOf('=') + 1);
-        x = x.replace(/^\s+|\s+$/g, ''); // 앞과 뒤의 공백 제거하기
+        x = x.replace(/^\s+|\s+$/g, ''); //앞과 뒤의 공백 제거하기
         
         if (x == cookie_name) {
-          return unescape(y); // unescape로 디코딩 후 값 리턴
+          return unescape(y); //unescape로 디코딩 후 값 리턴
         }
     }
 }

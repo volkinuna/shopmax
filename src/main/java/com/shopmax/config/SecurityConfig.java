@@ -10,7 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-@Configuration
+@Configuration //하나 이상의 Bean을 정의하고 관리하는 클래스임을 나타냄(스프링에서 의존성 관리를 해줌)
 @EnableWebSecurity //Spring security filterChain이 자동으로 포함되는 클래스를 만들어준다.
 public class SecurityConfig {
 

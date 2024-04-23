@@ -25,7 +25,7 @@ public class QCart extends EntityPathBase<Cart> {
     public final QBaseEntity _super = new QBaseEntity(this);
 
     //inherited
-    public final StringPath createBy = _super.createBy;
+    public final StringPath createdBy = _super.createdBy;
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 

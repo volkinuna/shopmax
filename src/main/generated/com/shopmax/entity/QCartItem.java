@@ -29,7 +29,7 @@ public class QCartItem extends EntityPathBase<CartItem> {
     public final NumberPath<Integer> count = createNumber("count", Integer.class);
 
     //inherited
-    public final StringPath createBy = _super.createBy;
+    public final StringPath createdBy = _super.createdBy;
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
