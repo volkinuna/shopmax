@@ -2,6 +2,7 @@ package com.shopmax.controller;
 
 import com.shopmax.dto.ItemFormDto;
 import com.shopmax.dto.ItemSearchDto;
+import com.shopmax.dto.MainItemDto;
 import com.shopmax.entity.Item;
 import com.shopmax.service.ItemService;
 import jakarta.validation.Valid;
@@ -136,5 +137,30 @@ public class ItemController {
         model.addAttribute("maxPage", 5);
 
         return "item/itemMng";
+    }
+
+    //상품 전체 리스트
+    @GetMapping(value = "/item/shop")
+    public String itemShopList(Model model, ItemSearchDto itemSearchDto,
+                               @RequestParam(value = "page") Optional<Integer> page) {
+
+        //한 페이지당 6개의 게시물을 보여줌
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 6);
+        Page<MainItemDto> items = itemService.getMainItemPage(itemSearchDto, pageable);
+
+        model.addAttribute("items", items);
+        model.addAttribute("itemSearchDto", itemSearchDto);
+        model.addAttribute("maxPage", 5);
+
+        return "item/itemShopList";
+    }
+
+    //상품 상세 페이지
+    @GetMapping(value = "/item/{itemId}")
+    public String itemDtl(Model model, @PathVariable("itemId") Long itemId) {
+        ItemFormDto itemFormDto = itemService.getItemDtl(itemId);
+        model.addAttribute("item", itemFormDto);
+
+        return "item/itemDtl";
     }
 }

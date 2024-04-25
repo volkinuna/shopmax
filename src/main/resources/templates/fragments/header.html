@@ -5,7 +5,7 @@
     <div class="search-wrap">
         <div class="container">
             <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
-            <form>
+            <form action="/item/shop" method="get">
                 <input type="text" name="searchQuery" class="form-control" placeholder="상품검색이 가능합니다." />
             </form>
         </div>
@@ -21,7 +21,7 @@
             <div class="main-nav d-none d-lg-block">
                 <nav class="site-navigation text-right text-md-center" role="navigation">
                     <ul class="site-menu js-clone-nav d-none d-lg-block">
-                        <!-- /* sec:authorize="hasAnyAuthority('ROLE_ADMIN')" => ROLE이 ADMIN인 경우 보여준다. */ -->
+                        <!--/* sec:authorize="hasAnyAuthority('ROLE_ADMIN')" => ROLE이 ADMIN인 경우 보여준다. */-->
                         <li class="has-children active" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
                             <a>관리자 메뉴</a>
                             <ul class="dropdown">
@@ -32,9 +32,9 @@
 
                         <li><a href="/item/shop">전체상품</a></li>
                         <li><a href="/members/qa">문의하기</a></li>
-                        <!-- /* sec:authorize="isAuthenticated()" => 로그인한 경우 보여준다. */ -->
+                        <!--/* sec:authorize="isAuthenticated()" => 로그인한 경우 보여준다. */-->
                         <li><a href="/orders" sec:authorize="isAuthenticated()">구매이력</a></li>
-                        <!-- /* sec:authorize="isAnonymous()" => 로그인 하지 않은 경우 true, 로그인하면 보여주지 않는다. */ -->
+                        <!--/* sec:authorize="isAnonymous()" => 로그인 하지 않은 경우 true, 로그인하면 보여주지 않는다. */-->
                         <li><a href="/members/login" sec:authorize="isAnonymous()">로그인</a></li>
                         <li><a href="/members/logout" sec:authorize="isAuthenticated()">로그아웃</a></li>
                     </ul>
