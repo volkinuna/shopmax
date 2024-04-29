@@ -70,4 +70,14 @@ public class Order { //클래스명은 설계도이므로 복수형으로 쓰지
 
         return totalPrice;
     }
+
+    //주문 취소
+    public void cancelOrder() {
+        this.orderStatus = OrderStatus.CANCEL; //저장된 필드의 값을 CANCEL로 변경한다.
+
+        //재고를 원래대로 돌려 놓는다.
+        for (OrderItem orderItem : orderItems) {
+            orderItem.cancel();
+        }
+    }
 }

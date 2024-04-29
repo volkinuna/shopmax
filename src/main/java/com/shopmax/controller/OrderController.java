@@ -1,21 +1,25 @@
 package com.shopmax.controller;
 
 import com.shopmax.dto.OrderDto;
+import com.shopmax.dto.OrderHistDto;
 import com.shopmax.service.OrderService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -60,5 +64,53 @@ public class OrderController {
         }
 
         return new ResponseEntity<Long>(orderId, HttpStatus.OK); //성공시
+    }
+
+    //주문내역 페이지
+    @GetMapping(value = {"/orders", "/orders/{page}"})
+    public String orderHist(@PathVariable("page")Optional<Integer> page,
+                            Principal principal, Model model) { //Principal은 로그인한 사용자의 정보를 가지고 있다.
+
+        //한 페이지당 4개의 게시물을 보여줌
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 4);
+
+        Page<OrderHistDto> orderHistDtoPList = orderService.getOrderList(principal.getName(), pageable);
+
+        model.addAttribute("orders", orderHistDtoPList);
+        model.addAttribute("maxPage", 5);
+
+        return "order/orderHist";
+    }
+
+    //주문 취소(Ajax로 처리)
+    @PatchMapping("/order/{orderId}/cancel") //PatchMapping : 일부를 update시 사용
+    public @ResponseBody ResponseEntity cancelOrder(@PathVariable("orderId") Long orderId,
+                                                    Principal principal) {
+
+        //1. 주문 취소 권한이 있는지 확인(본인 확인)
+        if (!orderService.validateOrder(orderId, principal.getName())) {
+            return new ResponseEntity<String>("주문 취소 권한이 없습니다.", HttpStatus.FORBIDDEN);
+        }
+
+        //2. 주문 취소
+        orderService.cancelOrder(orderId);
+
+        return new ResponseEntity<Long>(orderId, HttpStatus.OK);
+    }
+
+    //주문 삭제(Ajax로 처리)
+    @DeleteMapping("/order/{orderId}/delete")
+    public @ResponseBody ResponseEntity deleteOrder(@PathVariable("orderId") Long orderId,
+                                                    Principal principal) {
+
+        //1. 본인확인
+        if (!orderService.validateOrder(orderId, principal.getName())) {
+            return new ResponseEntity<String>("주문 삭제 권한이 없습니다.", HttpStatus.FORBIDDEN);
+        }
+
+        //2. 주문 삭제
+        orderService.deleteOrder(orderId);
+
+        return new ResponseEntity<Long>(orderId, HttpStatus.OK);
     }
 }
