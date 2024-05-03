@@ -70,7 +70,8 @@ public class OrderController {
     //주문내역 페이지
     @GetMapping(value = {"/orders", "/orders/{page}"})
     public String orderHist(@PathVariable("page") Optional<Integer> page,
-                            Principal principal, Model model) { //Principal은 로그인한 사용자의 정보를 가지고 있다.
+                            Principal principal, Model model) {
+                            //Principal은 로그인한 사용자의 정보를 가지고 있다.
 
         //한 페이지당 4개의 게시물을 보여줌
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 4);

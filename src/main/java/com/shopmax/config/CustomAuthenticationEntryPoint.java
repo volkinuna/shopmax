@@ -12,7 +12,10 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 
     //인증되지 않은 사용자가 페이지나 리소스를 요청할 경우 어떻게 처리할지
     @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized User"); //(에러 코드, 에러 메세지) / Unauthorized : 미승인
+    public void commence(HttpServletRequest request, HttpServletResponse response,
+                         AuthenticationException authException) throws IOException, ServletException {
+
+        //(에러 코드, 에러 메세지) / Unauthorized : 미승인
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized User");
     }
 }

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout1}">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
 <th:block layout:fragment="css">
     <style>
         .fieldError {
@@ -26,7 +28,8 @@
                 <div class="col-md-12">
                     <h2 class="h3 mb-3 text-black">상품등록</h2>
                     <div class="p-3 p-lg-5 border">
-                        <form role="form" th:action="@{'/admin/item/' + ${itemFormDto.id}}" method="post" enctype="multipart/form-data"
+                        <form role="form"  enctype="multipart/form-data"
+                              th:action="@{'/admin/item/' + ${itemFormDto.id}}" method="post"
                               th:object="${itemFormDto}" name="itemForm">
                             <input type="hidden" th:field="*{id}" />
 
@@ -50,7 +53,8 @@
                             <div class="form-group row">
                                 <div class="col-md-12">
                                     <label th:for="price" class="text-black">가격</label>
-                                    <input type="text" class="form-control" th:field="*{price}" placeholder="가격 입력" onkeyup="inputNumberFormat(this)" />
+                                    <input type="text" class="form-control" placeholder="가격 입력"
+                                           th:field="*{price}" onkeyup="inputNumberFormat(this)" />
                                     <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}"class="fieldError">Incorrect Data</p>
                                 </div>
                             </div>

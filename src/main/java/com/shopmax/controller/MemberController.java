@@ -28,7 +28,7 @@ public class MemberController {
     //로그인 화면
     @GetMapping(value = "/members/login") //접속주소 : localhost/members/login
     public String loginMember() {
-        return "member/memberLoginForm"; //memberLoginForm.html
+            return "member/memberLoginForm"; //memberLoginForm.html
     }
 
     //회원가입 화면
@@ -41,7 +41,8 @@ public class MemberController {
 
     //실제 회원가입 처리
     @PostMapping(value = "/members/new")
-    public String memberForm(@Valid MemberFormDto memberFormDto, BindingResult bindingResult, Model model) {
+    public String memberForm(@Valid MemberFormDto memberFormDto,
+                             BindingResult bindingResult, Model model) {
         //@Valid : 유효성을 검증하려는 객체 앞에 붙인다.
         //BindingResult : 유효성 검증 후의 결과가 들어있다.
         

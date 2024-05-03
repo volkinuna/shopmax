@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout1}">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
 <th:block layout:fragment="css">
     <style>
         .fieldError {
@@ -50,7 +52,8 @@
                             <div class="form-group row">
                                 <div class="col-md-12">
                                     <label th:for="price" class="text-black">가격</label>
-                                    <input type="text" maxlength="9" class="form-control" placeholder="가격 입력" th:field="*{price}" onkeyup="inputNumberFormat(this)"/>
+                                    <input type="text" maxlength="9" class="form-control" placeholder="가격 입력"
+                                           th:field="*{price}" onkeyup="inputNumberFormat(this)"/>
                                     <!-- this엔 이벤트가 발생하는 태그에 대한 정보가 들어있다. -->
                                     <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="fieldError">Incorrect Data</p>
                                 </div>

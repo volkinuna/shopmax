@@ -20,7 +20,6 @@ public class AuditorAwareImpl implements AuditorAware<String> {
             userId = authentication.getName(); //로그인한 사용자의 id(email)를 가지고 온다.
         }
 
-        return Optional.of(userId); //JPS Auditor에서 해당 userId(로그인한 사용자의 id)를 등록자와 수정자로 지정
+        return Optional.of(userId); //JPA Auditor에서 해당 userId(로그인한 사용자의 id)를 등록자와 수정자로 지정
     }
-
 }
